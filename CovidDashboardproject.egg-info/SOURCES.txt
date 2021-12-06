@@ -1,5 +1,0 @@
-setup.py
-CovidDashboardproject.egg-info/PKG-INFO
-CovidDashboardproject.egg-info/SOURCES.txt
-CovidDashboardproject.egg-info/dependency_links.txt
-CovidDashboardproject.egg-info/top_level.txt
