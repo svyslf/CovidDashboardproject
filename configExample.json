@@ -1,0 +1,6 @@
+{
+"apiKey": "Insert news API key here",
+"nation": "Insert nation (default : England)",
+"location": "Insert location in nation (default : Exeter)",
+"location_type":"Insert location type (default: ltla)"
+}
