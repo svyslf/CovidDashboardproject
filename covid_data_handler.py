@@ -34,7 +34,8 @@ def covid_API_request(location="Exeter", location_type="ltla"):
 
         Arguements:
         location {str} -- the location by which the API will filter data to be requested
-        location_type {ltla} -- the type of location which helps the API filter info further
+        
+        location_type {str} -- the type of location which helps the API filter info further
     
         Returns:
         data {dict | str} -- A dictionary and string union that contains all the relevant covid info

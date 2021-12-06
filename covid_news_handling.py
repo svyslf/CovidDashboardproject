@@ -35,7 +35,6 @@ def update_news(update_name):
         event {Event} -> The event scheduled by the function
     '''
     event = s.enter(1, 1, news_API_request, ())
-    print(update_name)
     return event, update_name
-update_news(update_name='test')
+update_news()
 
