@@ -60,7 +60,9 @@ Developer documentation can be found at docs/build/html
 
 ### Details
 Author: Vihan Sharma
+
 License: MIT License
+
 Acknowledgements : Matt Collison and Hugo Barbosa
 
 
