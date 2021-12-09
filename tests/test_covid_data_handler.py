@@ -108,8 +108,6 @@ def test_call_all():
     covid_final_data_test = call_all()
     assert isinstance(covid_final_data_test, (tuple))
 
-def test_schedule_covid_updates():
-    schedule_covid_updates(update_interval=10, update_name='update test')
 
 
 

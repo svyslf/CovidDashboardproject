@@ -33,9 +33,11 @@ def parse_csv_data(csv_filename) -> list:
 def process_covid_csv_data(covid_csv_data: list) -> tuple[int, int, int]:
     """Processes the csv data and returns relevant integer values for selected data.
     Arguement:
+
     covid_csv_data {list} - a list of strings containing the above data
 
     Returns:
+
     tuple {int, int, int} containing:
     last7days_cases {int} - Total cases in the last 7 days as an integer
     hospital_cases {int} - Latest hospital cases value in the csv
@@ -52,7 +54,6 @@ def process_covid_csv_data(covid_csv_data: list) -> tuple[int, int, int]:
 
 def covid_API_request(location: str = "Exeter", location_type: str = "ltla"):
     """Returns up to date covid data as a dictionary from the public health API
-
     Arguements:
     location {str} -- the location by which the API will filter data to be requested
 
@@ -82,7 +83,6 @@ capture_data_nation = covid_API_request(location="England", location_type="natio
 
 def local_data_7_days(capture_data: Callable) -> int:
     """Total cases in last 7 days in the local area
-
     Arguement:
 
     capture_data {callable} - Takes the value returned from covid_API_request function
@@ -161,7 +161,12 @@ covid_final_data = []
 
 
 def call_all() -> tuple:
-    """Calls all functions and outputs value to a tuple"""
+    """Calls all functions and outputs value to a tuple
+    Returns:
+
+    A tuple containing all relevant data obtained from functions above.
+
+    """
     # print('running')
     covid_final_data = (
         local_data_7_days(capture_data),
@@ -172,28 +177,8 @@ def call_all() -> tuple:
     return covid_final_data
 
 
-s = sched.scheduler(time.time, time.sleep)
-
-
-def schedule_covid_updates(
-    update_interval: float, update_name: str, func_name: Callable = call_all
-) -> sched.Event:
-    """Schedules updates to covid data
-    Arguements:
-    update_interval {float} -- The time at which the update will be executed
-
-    update_name {str} -- The name of the update.
-
-    Returns:
-    event {Event} -> The event scheduled by the function
-    """
-    event = s.enter(update_interval, 1, func_name, ())
-    return event, update_name
-
-
 if __name__ == "__main__":
     parse_csv_data(csv_filename="nation_2021-10-28.csv")
     process_covid_csv_data(
         covid_csv_data=parse_csv_data(csv_filename="nation_2021-10-28.csv")
     )
-    s.run()

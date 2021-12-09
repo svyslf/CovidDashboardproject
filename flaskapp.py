@@ -1,11 +1,12 @@
+"""The flaskapp module runs the entire program."""
 from datetime import datetime, timedelta
 import logging
 import time
 import sched
 import json
-from typing import Callable, Any
+from typing import Callable
 from flask import Flask, render_template, redirect, request, Markup
-from covid_data_handler import call_all, schedule_covid_updates
+from covid_data_handler import call_all
 from covid_news_handling import news_API_request
 
 FORMAT = "%(levelname)s: %(asctime)s: %(message)s"
@@ -19,14 +20,14 @@ def schedule_update(update_interval: float, update_func_name: Callable) -> sched
     # slightly different implementation than in covid_data_handler, but tests prove it works
     """Schedules updates to covid and news data.
 
-        Arguements:
-            update_interval {float} -- The time at which the update will be executed
+    Arguements:
+        update_interval {float} -- The time at which the update will be executed
 
-            update_func_name {callable} -- The function to be called in the scheduler.
-            For ex. for a covid update, update_func_name would be = call_all()
+        update_func_name {callable} -- The function to be called in the scheduler.
+        For ex. for a covid update, update_func_name would be = call_all()
 
-        Returns:
-            event {Event} -> The event scheduled by the function
+    Returns:
+        event {Event} -> The event scheduled by the function
     """
     logging.info("queuing update")
     event = s.enter(update_interval, 1, update_func_name, ())
@@ -73,7 +74,12 @@ def home() -> str:
 
 @app.route("/index", methods=["GET"])
 def index():
-    """Takes user inputs and computes appropriate response"""
+    """Takes user inputs and computes appropriate response
+    Returns: 
+    A redirect to home page after reacting to user inputs. 
+    Calculates time interval and responses to button clicks 
+    
+    """
     # Global declaration used to avoid unbound variables further down the program
     global update_list, extract_time, duplicate_name, repeat_check
 
@@ -100,9 +106,9 @@ def index():
 
         def time_calc() -> list:
             """Calculates time interval based on current time and time inputted by user
-                Returns a list with the time inputted by user and the time interval in:
-                - seconds
-                - a string of format (%H:%M:%S)
+            Returns a list with the time inputted by user and the time interval in:
+            - seconds
+            - a string of format (%H:%M:%S)
             """
             time_input = request.args.get("update")
             time_then = datetime.strptime(time_input, "%H:%M")
@@ -126,19 +132,19 @@ def index():
 
         def toast_content_creator(
             content_info: str, event: sched.Event, func1=None, func2=None
-        ) -> dict[str, Any]:
+        ) -> dict[str]:
             """Creates all information to be displayed on toasts on webpage.
-                Easily modifiable based on user-input.
+            Easily modifiable based on user-input.
 
-                Arguements:
-                content_info {str} -- The content information that is displayed on the webpage.
+            Arguements:
+            content_info {str} -- The content information that is displayed on the webpage.
 
-                event {event} -- Event information used to identify which toast cancels which event
+            event {event} -- Event information used to identify which toast cancels which event
 
-                func1 and func2 {callable} -- The functions (None by default) that the scheduler calls when scheduling events
+            func1 and func2 {callable} -- The functions (None by default) that the scheduler calls when scheduling events
 
-                Returns:
-                index_dictionary {dict[str, any]} -- A dictionary containing user inputs and event information
+            Returns:
+            index_dictionary {dict[str, any]} -- A dictionary containing user inputs and event information
             """
             time_until_update_popup = Markup(
                 f'<span class="badge badge-dark"> (in {extract_time[1]}) </span>'
@@ -197,9 +203,8 @@ def index():
                         func2=news_API_request,
                     )
                 )
-            update_list = sorted(
-                update_list, key=lambda x: x["order"]
-            )  # sort list in by increasing time interval
+            # sort update_list by increasing time interval
+            update_list = sorted(update_list, key=lambda x: x["order"])
 
     for pos, val in enumerate(update_list):
         # For toasts in update_list, remove toasts with finished events if they are NOT repeated.
@@ -207,6 +212,7 @@ def index():
             if repeat_check:
                 logging.info("This update will be repeated in 24 hours")
                 repeat_check = False
+
                 if val["cov_func"] is not None:
                     val["event"] = schedule_update(
                         extract_time[0] + 86400, val["cov_func"]

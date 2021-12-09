@@ -11,9 +11,9 @@ data = {}
 def news_API_request(covid_terms="Covid COVID-19 coronavirus"):
     """Requests news data from newsapi.org to be displayed on the webpage in the flaskapp
     Arguements:
-        covid_terms {str} - A string of relevant keywords which act as keywords to filter news articles
+    covid_terms {str} - A string of relevant keywords which act as keywords to filter news articles
     Returns:
-        A list of dictionaries containing relevant article information
+    A list of dictionaries containing relevant article information
     """
     base_url = "https://newsapi.org/v2/everything?"
     api_key = "7ead3967d6264d4abcfbbae5bb65ea4d"  # data.get("apiKey")
