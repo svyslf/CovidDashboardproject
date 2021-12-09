@@ -9,34 +9,9 @@ Users are also able to schedule regular and repeated updates to covid and news d
 To get started, we have to do a few things. 
 ## Prerequisites
 Requires Python 3.9.7
-
+    
 ## Installation
-To install all required modules, enter the following command in your terminal:
-    `pip install -r requirements.txt`
-
-# Getting Started
-### Dashboard Setup
-1. You will need an API key from Newsapi.org for the news data to appear. 
-2. This can be obtained at Newsapi.org > Get API key
-3. Register for an API key, and when obtained, input it in the configExample.json file
-4. In the config file, you can edit the filter search terms for getting different news info
-5. You can also edit location info to get values for different places in the UK.
-6. When done with the config file, rename it to config.json. This is important.
-7. Run the module called Flaskapp using the following command (or by using the run feature in your code editor):
-    `Python -m flaskapp`
- 
-### How to use the dashboard
-If you have followed the steps correctly, you should see a webpage that looks like this:
-![Screenshot (271)](https://user-images.githubusercontent.com/94067614/145304122-a42a5b5f-be1f-4299-8035-5f0e5fbadb67.png)
-
-You can schedule regular and repeated updates to news and covid data. 
-1. Input your chosen time
-2. Select type of update
-3. Click submit
-Note: Inputting a time in the past or right now schedules an update for the next day, at that time.
-
-### Testing
-To enable Pytest, follow these steps (in windows):
+### Setup a virtual environment
 1. Create a virtual environment called 'venv' using the following command in your terminal:
     `python3 -m venv venv`
 2. Activate it using:   
@@ -47,8 +22,39 @@ To enable Pytest, follow these steps (in windows):
     `pip install -r requirements.txt` 
 5. Handle setuptools dependencies by:
     `pip install -e .`
-6. Run pytest:
+    This sets up the modules in the virtual environment, allowing them to run. 
+Note: Before moving on, you may need to deactivate the virtual environment using: 
+    `deactivate`
+And then reactivate it (using the command in step 2), to make sure it recognizes all installations. 
+
+    
+# Getting Started
+## Dashboard Setup
+1. You will need an API key from www.Newsapi.org for the news data to appear. 
+2. This can be obtained at Newsapi.org > Get API key
+3. Register for an API key, and when obtained, input it in the configExample.json file
+4. In the config file, you can edit the filter search terms for getting different news info
+5. You can also edit location info to get values for different places in the UK.
+6. When done with the config file, rename it to config.json. This is important.
+7. Run the program in terminal using:
+    `Python -m flaskapp`
+
+## How to use the dashboard
+If you have followed the steps correctly, you should see a webpage that looks like this:
+![Screenshot (271)](https://user-images.githubusercontent.com/94067614/145304122-a42a5b5f-be1f-4299-8035-5f0e5fbadb67.png)
+
+You can schedule regular and repeated updates to news and covid data. 
+1. Input your chosen time
+2. Select type of update
+3. Click submit
+Note: Inputting a time in the past or right now schedules an update for the next day, at that time.
+
+# Testing
+To run tests, restart your venv following the steps detailed in the 'NOTE' in Installation.
+Then, tests, which are found in the tests folder, will by run by the following command:
     `Pytest`
+
+
 ### Developer Documentation
 Developer documentation can be found at docs/build/html
 
