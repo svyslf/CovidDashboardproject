@@ -1,3 +1,8 @@
 config.json
 CovidDashboardproject.egg-info
 venv
+template
+static
+.vscode/
+.pytest_cache
+__pycache__
