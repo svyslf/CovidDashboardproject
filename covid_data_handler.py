@@ -73,7 +73,7 @@ def covid_API_request(location: str = "Exeter", location_type: str = "ltla"):
         "hospitalCases": "hospitalCases",
     }
     api = Cov19API(filters=area_filter, structure=cases_and_deaths)
-    data = api.get_json(save_as="data.json")
+    data = api.get_json()
     return data
 
 
