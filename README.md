@@ -35,7 +35,7 @@ And then reactivate it (using the command in step 2), to make sure it recognizes
 3. Register for an API key, and when obtained, input it in the configExample.json file
 4. In the config file, you can edit the filter search terms for getting different news info
 5. You can also edit location info to get values for different places in the UK.
-6. When done with the config file, rename it to config.json. This is important.
+6. When done with the config file, rename it to config.json. This is important, as the program recognizes a file name config.json only. 
 7. Run the program in terminal using:
     `Python -m flaskapp`
 
