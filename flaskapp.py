@@ -39,11 +39,11 @@ update_list = []
 articles = news_API_request(covid_terms="Covid COVID-19 coronavirus")
 config_data = {}
 
-# with open("config.json", encoding= 'utf-8') as json_data_file:
-#    config_data = json.load(json_data_file)
-# nation = config_data.get('nation')
-# location = config_data.get('location')
-# image = config_data.get('image')
+with open("config.json", encoding= 'utf-8') as json_data_file:
+    config_data = json.load(json_data_file)
+    nation = config_data.get('nation')
+    location = config_data.get('location')
+    image = config_data.get('image')
 
 for article in articles:
     temp = Markup(f'<a href ={article["url"]}> Read More...</a>')
@@ -59,15 +59,15 @@ def home() -> str:
     return render_template(
         "index.html",
         title=Markup("<b>Smart Covid Dashboard</b>"),
-        location=Markup(f"<b>Exeter</b>"),
+        location=Markup(f"<b>{location}</b>"),
         local_7day_infections=display_data[0],
-        nation_location=Markup(f"<b>England</b>"),
+        nation_location=Markup(f"<b>{nation}</b>"),
         national_7day_infections=display_data[1],
         hospital_cases="Hospital cases: " + str(display_data[2]),
         deaths_total="Total deaths: " + str(display_data[3]),
         news_articles=articles[0:4],
         updates=update_list,
-        image="dowwn.jpg",
+        image=image,
         favicon="static/images/favicon.ico",
     )
 

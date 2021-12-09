@@ -4,11 +4,12 @@ import time
 import requests
 
 data = {}
-# with open("config.json", encoding='utf-8') as json_data_file:
-# data = json.load(json_data_file)
+with open("config.json", encoding='utf-8') as json_data_file:
+    data = json.load(json_data_file)
+    covid_terms_json = data.get('covid_terms')
 
 
-def news_API_request(covid_terms="Covid COVID-19 coronavirus"):
+def news_API_request(covid_terms=covid_terms_json):
     """Requests news data from newsapi.org to be displayed on the webpage in the flaskapp
     Arguements:
     covid_terms {str} - A string of relevant keywords which act as keywords to filter news articles

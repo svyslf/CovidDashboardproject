@@ -5,10 +5,10 @@ from typing import Callable
 from uk_covid19 import Cov19API
 
 cov_data = {}
-# with open("config.json", encoding='utf-8') as json_data_file:
-# cov_data = json.load(json_data_file)
-# location_data = cov_data.get('location')
-# location_type_data = cov_data.get('location_type')
+with open("config.json", encoding='utf-8') as json_data_file:
+    cov_data = json.load(json_data_file)
+    location_data = cov_data.get('location')
+    location_type_data = cov_data.get('location_type')
 
 
 def parse_csv_data(csv_filename) -> list:
@@ -52,7 +52,7 @@ def process_covid_csv_data(covid_csv_data: list) -> tuple[int, int, int]:
     return last7days_cases, hospital_cases, total_deaths
 
 
-def covid_API_request(location: str = "Exeter", location_type: str = "ltla"):
+def covid_API_request(location: str = location_data, location_type: str = location_type_data):
     """Returns up to date covid data as a dictionary from the public health API
     Arguements:
     location {str} -- the location by which the API will filter data to be requested
