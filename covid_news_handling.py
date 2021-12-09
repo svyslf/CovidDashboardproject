@@ -42,5 +42,4 @@ def update_news(update_name="default") -> tuple[sched.Event, str]:
     event = s.enter(1, 1, news_API_request, ())
     return event, update_name
 
-
 update_news()
