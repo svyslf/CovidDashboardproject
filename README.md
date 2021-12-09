@@ -58,7 +58,7 @@ Check the covidlog.log file for a log of all things that go on on the website
 
 ### Developer Documentation
 Developer documentation can be found at docs/build/html
-
+github - https://github.com/svyslf/CovidDashboardproject
 ### Details
 Author: Vihan Sharma
 
