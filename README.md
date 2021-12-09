@@ -30,10 +30,9 @@ If you have followed the steps correctly, you should see a webpage that looks li
 ![Screenshot (271)](https://user-images.githubusercontent.com/94067614/145304122-a42a5b5f-be1f-4299-8035-5f0e5fbadb67.png)
 
 You can schedule regular and repeated updates to news and covid data. 
-1. To schedule an update at any time:
-   Input your chosen time
-   Select type of update
-   Click submit
+1. Input your chosen time
+2. Select type of update
+3. Click submit
 Note: Inputting a time in the past or right now schedules an update for the next day, at that time.
 
 ### Testing
