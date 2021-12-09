@@ -19,14 +19,14 @@ def schedule_update(update_interval: float, update_func_name: Callable) -> sched
     # slightly different implementation than in covid_data_handler, but tests prove it works
     """Schedules updates to covid and news data.
 
-    Arguements:
-        update_interval {float} -- The time at which the update will be executed
+        Arguements:
+            update_interval {float} -- The time at which the update will be executed
 
-        update_func_name {callable} -- The function to be called in the scheduler.
-        For ex. for a covid update, update_func_name would be = call_all()
+            update_func_name {callable} -- The function to be called in the scheduler.
+            For ex. for a covid update, update_func_name would be = call_all()
 
-    Returns:
-        event {Event} -> The event scheduled by the function
+        Returns:
+            event {Event} -> The event scheduled by the function
     """
     logging.info("queuing update")
     event = s.enter(update_interval, 1, update_func_name, ())
@@ -100,9 +100,9 @@ def index():
 
         def time_calc() -> list:
             """Calculates time interval based on current time and time inputted by user
-            Returns a list with the time inputted by user and the time interval in:
-            - seconds
-            - a string of format (%H:%M:%S)
+                Returns a list with the time inputted by user and the time interval in:
+                - seconds
+                - a string of format (%H:%M:%S)
             """
             time_input = request.args.get("update")
             time_then = datetime.strptime(time_input, "%H:%M")
@@ -128,16 +128,16 @@ def index():
             content_info: str, event: sched.Event, func1=None, func2=None
         ) -> dict[str, Any]:
             """Creates all information to be displayed on toasts on webpage.
-            Easily modifiable based on user-input.
+                Easily modifiable based on user-input.
 
-            Arguements:
+                Arguements:
                 content_info {str} -- The content information that is displayed on the webpage.
 
                 event {event} -- Event information used to identify which toast cancels which event
 
                 func1 and func2 {callable} -- The functions (None by default) that the scheduler calls when scheduling events
 
-            Returns:
+                Returns:
                 index_dictionary {dict[str, any]} -- A dictionary containing user inputs and event information
             """
             time_until_update_popup = Markup(
@@ -166,6 +166,7 @@ def index():
                 repeat_check = True
             else:
                 repeat_info = ""
+                repeat_check = False
             if covid_tick and news_tick:
                 both_events = schedule_update(
                     extract_time[0], call_all
