@@ -4,9 +4,9 @@ import time
 import requests
 
 data = {}
-with open("config.json", encoding='utf-8') as json_data_file:
+with open("config.json", encoding="utf-8") as json_data_file:
     data = json.load(json_data_file)
-    covid_terms_json = data.get('covid_terms')
+    covid_terms_json = data.get("covid_terms")
 
 
 def news_API_request(covid_terms=covid_terms_json):
@@ -41,5 +41,6 @@ def update_news(update_name="default") -> tuple[sched.Event, str]:
     """
     event = s.enter(1, 1, news_API_request, ())
     return event, update_name
+
 
 update_news()

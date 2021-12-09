@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>covid_data_handler module &#8212; Smart Covid dashboard  documentation</title>
+    <title>Welcome to Smart Covid Dashboard’s documentation! &#8212; Smart Covid Dashboard  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
           <div class="body" role="main">
             
   <section id="module-covid_data_handler">
-<span id="covid-data-handler-module"></span><h1>covid_data_handler module<a class="headerlink" href="#module-covid_data_handler" title="Permalink to this headline">¶</a></h1>
+<span id="welcome-to-smart-covid-dashboard-s-documentation"></span><h1>Welcome to Smart Covid Dashboard’s documentation!<a class="headerlink" href="#module-covid_data_handler" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="covid_data_handler.call_all">
 <span class="sig-prename descclassname"><span class="pre">covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">call_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#covid_data_handler.call_all" title="Permalink to this definition">¶</a></dt>
@@ -122,6 +122,70 @@ hospital_cases {int} - Latest hospital cases value in the csv
 total_deaths {int} - Latest Total deaths value in the csv</p>
 </dd></dl>
 
+<span class="target" id="module-covid_news_handling"></span><dl class="py function">
+<dt class="sig sig-object py" id="covid_news_handling.news_API_request">
+<span class="sig-prename descclassname"><span class="pre">covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">news_API_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">covid_terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Covid</span> <span class="pre">COVID-19</span> <span class="pre">coronavirus'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#covid_news_handling.news_API_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests news data from newsapi.org to be displayed on the webpage in the flaskapp
+Arguements:
+covid_terms {str} - A string of relevant keywords which act as keywords to filter news articles
+Returns:
+A list of dictionaries containing relevant article information</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_news_handling.update_news">
+<span class="sig-prename descclassname"><span class="pre">covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">update_news</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">sched.Event</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_news_handling.update_news" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedules updates to news data
+Arguements:
+update_interval {float} – The time at which the update will be executed</p>
+<p>update_name {str} – The name of the update.</p>
+<p>Returns:
+event {Event} -&gt; The event scheduled by the function</p>
+</dd></dl>
+
+<span class="target" id="module-flaskapp"></span><p>The flaskapp module runs the entire program.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="flaskapp.home">
+<span class="sig-prename descclassname"><span class="pre">flaskapp.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#flaskapp.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a template with all information at the home page</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="flaskapp.index">
+<span class="sig-prename descclassname"><span class="pre">flaskapp.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flaskapp.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes user inputs and computes appropriate response
+Returns:
+A redirect to home page after reacting to user inputs.
+Calculates time interval and responses to button clicks</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="flaskapp.schedule_update">
+<span class="sig-prename descclassname"><span class="pre">flaskapp.</span></span><span class="sig-name descname"><span class="pre">schedule_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sched.Event</span></span></span><a class="headerlink" href="#flaskapp.schedule_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedules updates to covid and news data.</p>
+<dl>
+<dt>Arguements:</dt><dd><p>update_interval {float} – The time at which the update will be executed</p>
+<p>update_func_name {callable} – The function to be called in the scheduler.
+For ex. for a covid update, update_func_name would be = call_all()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>event {Event} -&gt; The event scheduled by the function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
 </section>
 
 
@@ -131,7 +195,7 @@ total_deaths {int} - Latest Total deaths value in the csv</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Smart Covid dashboard</a></h1>
+<h1 class="logo"><a href="#">Smart Covid Dashboard</a></h1>
 
 
 
@@ -145,7 +209,7 @@ total_deaths {int} - Latest Total deaths value in the csv</p>
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="#">Documentation overview</a><ul>
   </ul></li>
 </ul>
 </div>
@@ -179,7 +243,7 @@ total_deaths {int} - Latest Total deaths value in the csv</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="_sources/covid_data_handler.rst.txt"
+      <a href="_sources/index.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

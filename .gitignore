@@ -7,11 +7,4 @@ static/
 .pytest_cache/
 __pycache__/
 covidlog.log
-docs/source/
-docs/build/doctrees/
-docs/build/html/_sources
-docs/build/html/_static
-docs/build/html/.buildinfo
-docs/build/make.bat
-docs/Makefile
 tests/__pycache__

@@ -39,11 +39,11 @@ update_list = []
 articles = news_API_request(covid_terms="Covid COVID-19 coronavirus")
 config_data = {}
 
-with open("config.json", encoding= 'utf-8') as json_data_file:
+with open("config.json", encoding="utf-8") as json_data_file:
     config_data = json.load(json_data_file)
-    nation = config_data.get('nation')
-    location = config_data.get('location')
-    image = config_data.get('image')
+    nation = config_data.get("nation")
+    location = config_data.get("location")
+    image = config_data.get("image")
 
 for article in articles:
     temp = Markup(f'<a href ={article["url"]}> Read More...</a>')
@@ -75,13 +75,13 @@ def home() -> str:
 @app.route("/index", methods=["GET"])
 def index():
     """Takes user inputs and computes appropriate response
-    Returns: 
-    A redirect to home page after reacting to user inputs. 
-    Calculates time interval and responses to button clicks 
-    
+    Returns:
+    A redirect to home page after reacting to user inputs.
+    Calculates time interval and responses to button clicks
+
     """
     # Global declaration used to avoid unbound variables further down the program
-    global update_list, extract_time, duplicate_name, repeat_happens, repeat_info, repeat_check
+    global update_list, extract_time, duplicate_name, repeat_info, repeat_check
 
     s.run(blocking=False)
     duplicate_name = False
@@ -103,6 +103,7 @@ def index():
             pos = pos + 1
 
     if "update" in request.args:
+
         def time_calc() -> list:
             """Calculates time interval based on current time and time inputted by user
             Returns a list with the time inputted by user and the time interval in:
@@ -128,9 +129,14 @@ def index():
         repeat = request.args.get("repeat")
         covid_tick = request.args.get("covid-data")
         news_tick = request.args.get("news")
-        repeat_info = ''
+        repeat_info = ""
+
         def toast_content_creator(
-            content_info: str, event: sched.Event, func1=None, func2=None, repeating = False
+            content_info: str,
+            event: sched.Event,
+            func1: Callable = None,
+            func2=None,
+            repeating: bool = False,
         ) -> dict[str]:
             """Creates all information to be displayed on toasts on webpage.
             Easily modifiable based on user-input.
@@ -142,15 +148,16 @@ def index():
 
             func1 and func2 {callable} -- The functions (None by default) that the scheduler calls when scheduling events
 
+            repeating {bool} -- check's if updates are repeating. False by default
             Returns:
-            index_dictionary {dict[str, any]} -- A dictionary containing user inputs and event information
+            index_dictionary {dict[str, any]} -- A dictionary containing event information
             """
             time_until_update_popup = Markup(
                 f'<span class="badge badge-dark"> (in {extract_time[1]}) </span>'
             )
             index_dictionary = {
                 "title": label,
-                "content": f"{repeat_info} {content_info} {extract_time[2]}"
+                "content": f"{repeat_info} {content_info} {extract_time[2]} "
                 + time_until_update_popup,
                 "order": extract_time[0],
                 "event": event,
@@ -170,7 +177,7 @@ def index():
             if repeat:
                 repeat_info = "Repeated"
                 repeat_check = True
-           
+
             if covid_tick and news_tick:
                 both_events = schedule_update(
                     extract_time[0], call_all
@@ -181,7 +188,7 @@ def index():
                         event=both_events,
                         func1=call_all,
                         func2=news_API_request,
-                        repeating = repeat_check
+                        repeating=repeat_check,
                     )
                 )
             elif covid_tick:
@@ -191,7 +198,7 @@ def index():
                         content_info="Covid update at",
                         event=covid_event,
                         func1=call_all,
-                        repeating = repeat_check
+                        repeating=repeat_check,
                     )
                 )
             elif news_tick:
@@ -201,17 +208,19 @@ def index():
                         content_info="News update at",
                         event=news_event,
                         func2=news_API_request,
-                        repeating = repeat_check
+                        repeating=repeat_check,
                     )
                 )
             # sort update_list by increasing time interval
             update_list = sorted(update_list, key=lambda x: x["order"])
 
+    # check if update is not in queue
+    # if it is repeating, reschedule it
+    # if not, delete it.
     for pos, val in enumerate(update_list, 0):
-        if val['event'] not in s.queue: 
-            if val['Repeat']:
+        if val["event"] not in s.queue:
+            if val["Repeat"]:
                 logging.info("This update will be repeated in 24 hours")
-                #repeat_happens = True
 
                 if val["cov_func"] is not None:
                     val["event"] = schedule_update(
@@ -224,8 +233,8 @@ def index():
                 else:  # otherwise, both updates were requested
                     val["event"] = schedule_update(
                         extract_time[0] + 86400, val["cov_func"]
-                    ) and schedule_update(extract_time[0] + 86400, val["news_func"])         
-            else: #val['event'] not in s.queue: #or repeat_happens is False:
+                    ) and schedule_update(extract_time[0] + 86400, val["news_func"])
+            else:
                 update_list.pop(pos)
                 logging.info("This update has been removed")
         # For toasts in update_list, remove toasts with finished events if they are NOT repeated
