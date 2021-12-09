@@ -23,7 +23,7 @@ To install all required modules, enter the following command in your terminal:
 5. You can also edit location info to get values for different places in the UK.
 6. When done with the config file, rename it to config.json. This is important.
 7. Run the module called Flaskapp using the following command (or by using the run feature in your code editor):
-    Python -m flaskapp
+    `Python -m flaskapp`
  
 ### How to use the dashboard
 If you have followed the steps correctly, you should see a webpage that looks like this:
