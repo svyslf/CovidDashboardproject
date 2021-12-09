@@ -27,4 +27,6 @@ To install all required modules, enter the following command in your terminal:
  
 ### How to use the dashboard
 If you have followed the steps correctly, you should see a webpage that looks like this:
+![Screenshot (271)](https://user-images.githubusercontent.com/94067614/145304122-a42a5b5f-be1f-4299-8035-5f0e5fbadb67.png)
+
 
