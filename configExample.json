@@ -1,5 +1,7 @@
 {
 "apiKey": "Insert news API key here",
-"location": "Insert location in nation (default : Exeter)",
-"location_type":"Insert location type (default: ltla)"
+"nation": "Insert nation in UK (default: England)(this is for the website)",
+"location": "Insert location (default : Exeter or England)(for the api requests)",
+"location_type":"Insert location type (default: ltla for Exeter or nation for England)",
+"image": "insert image name  in .jpg or .jpeg"
 }
