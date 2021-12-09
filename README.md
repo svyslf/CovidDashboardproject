@@ -51,7 +51,7 @@ Note: Inputting a time in the past or right now schedules an update for the next
 
 # Testing
 To run tests, restart your venv following the steps detailed in the 'NOTE' in Installation.
-Then, tests, which are found in the tests folder, will by run by the following command:
+Then, tests, which are found in the tests folder, will be run by the following command:
     `Pytest`
 
 
